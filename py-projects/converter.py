@@ -1,60 +1,54 @@
 import math
-from xdrlib import ConversionError
 
 def dist(a, b):
     return ( a * b)
 
-ref = ['meters', 'inches', 'feet', 'yards', 'miles', 'kilos']
+ref = ['meters', 'inches', 'feet', 'yards', 'miles', 'kilos'] # user reference of what they can convert
+choice = [] # used to store the inputs of the user for later use
+change = []
 
-meters = 1.0
+user_units = input(f'\nWhat Measurement do you want to Use:\n{ref}: ').lower() # user input for intial measurement
 
-inchs = 0.0254
+units_dist = float(input(f'\nWhat is the distance in {user_units}: \n')) # user input for distance 
 
-feet = 0.3048
+user_convert = input(f'\nWhat do you want to convert {user_units} to?:\n{ref}: \n').lower() # users measurement wanted to be converted too
 
-yards = 0.9144 
+choice.append(user_units) 
+change.append(user_convert)
 
-miles = 1609.34
+# Using the User_units input and matching it with the ref and then changing the out put to equal the what it would be if converted to meters
+# to complete the formula
 
-kilos = 1000.0
+if user_units == 'meters':
+    user_units = 1.0
+elif user_units == 'inches':
+    user_units = 0.0254
+elif user_units == 'feet':
+    user_units = 0.3048
+elif user_units == 'yards':
+    user_units = 0.9144
+elif user_units == 'miles':
+    user_units = 1609.34
+elif user_units == 'kilos':
+    user_units = 1000.0
 
-user_units = input(f'\nWhat Measurement do you want to Use:\n{ref}: ').lower()
+# Using the User_convert input and matching it with the ref and then changing the out put to equal the what it would be if converted to meters
+# to complete the formula
 
-units_dist = float(input(f'\nWhat is the distance in {user_units}: \n'))
+if user_convert == 'meters':
+    user_convert = 1.0
+elif user_convert == 'inches':
+    user_convert = 0.0254
+elif user_convert == 'feet':
+    user_convert = 0.3048
+elif user_convert == 'yards':
+    user_convert = 0.9144
+elif user_convert == 'miles':
+    user_convert = 1609.34
+elif user_convert == 'kilos':
+    user_convert = 1000.0
 
-user_convert = input(f'\nWhat do you want to convert {user_units} to?:\n{ref}: \n').lower()
-print(meters)
-if user_units:
-    a = dist(units_dist, float(user_units))
-    if user_convert:
-        conversion = a / user_convert
-        print(conversion)
+a = dist(units_dist, user_units)  # using the Function to get the distance * referance
+len_kilos = a / user_convert # dividing the initial distance by the distance of the converted number
 
-print(f'{conversion}')
-
-
-
-# print(f'{round(user*feet, 1)} feet')
-# meters = ref[0]
-# meters = 1
-
-# inchs = ref[1]
-# inchs = 0.0254
-
-# feet = ref[2]
-# feet = 0.3048
-
-# yards = ref[3]
-# yards = 0.9144 
-
-# miles = ref[4]
-# miles = 1609.34
-
-# kilos = ref[5]
-# kilos = 1000
-
-# if ref[0] in user_units:
-#     a = dist(units_dist, meters)
-#     if ref[5] in user_convert:
-#         len_kilos = a / kilos
-#         print(f'\n{units_dist} {user_units} is {len_kilos} kilos\n')
+print(f'\n{units_dist} {"".join(choice)} is {round(len_kilos, 3)} {"".join(change)}\n')
